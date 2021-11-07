@@ -24,7 +24,7 @@ classification task. However, the traditional classification methods with RNN on
 on the words and their relationship in some specific corpus/dataset.
 ### OBJECTIVE
 
-. Our focus is to develop an application to classify the review of movies dataset using RNN. We
+Our focus is to develop an application to classify the review of movies dataset using RNN. We
 intend to use LSTM to classify the polarity of reviews into positive and negative.
 
 ### METHODOLOGY
@@ -33,11 +33,11 @@ can make decisions about information based on the content from the corpus. </br>
 classifying the text based on the semantic analysis. 
 Detailed process of how model is built is explained further in the report.</br>
 Basic Methodology can be described in following steps.</br>
-#### Step 1 : Collecting Data</br>
+### Step 1 : Collecting Data</br>
 We are using tensorflow dataset of imdb reviews. The IMDB large movie review dataset is a
 binary classification dataset—all the reviews have either a positive or negative sentiment. The
 dataset will be imported from tensorflow-datasets library.</br>
-#### Step 2: Data preprocessing</br>
+### Step 2: Data preprocessing</br>
 A simple approach is to assume that the smallest unit of information in a text is the word (as
 opposed to the character). Therefore, we will be representing our texts as word sequences.</br>
 The sentence is “ This is a Cat.”</br>
@@ -46,7 +46,7 @@ that punctuation and letter case don’t influence the meaning of words. In fact
 making distinctions between similar words such as This and this or cat. and cat.
 The sequence of words are converted and encoded into integers using tensorflow encoder. This
 encoded integer is dictionary of words with unique integer assigned to each word.</br>
-#### Step 3: Prepare the data for training</br>
+### Step 3: Prepare the data for training</br>
 Next create batches of these encoded strings. Use the padded_batch method to zero-pad the
 sequences to the length of the longest string in the batch:</br>
 BUFFER_SIZE = 10000</br>
@@ -54,7 +54,7 @@ BATCH_SIZE = 64</br>
 train_dataset = train_dataset.shuffle(BUFFER_SIZE)</br>
 train_dataset = train_dataset.padded_batch(BATCH_SIZE, train_dataset.output_shapes)</br>
 test_dataset = test_dataset.padded_batch(BATCH_SIZE, test_dataset.output_shapes)</br>
-#### Step 4: Create the model</br>
+### Step 4: Create the model</br>
 Build a tf.keras.Sequential model and start with an embedding layer. An embedding layer stores
 one vector per word. When called, it converts the sequences of word indices to sequences of
 vectors. These vectors are trainable. After training (on enough data), words with similar meanings
@@ -67,7 +67,7 @@ input forward and backwards through the RNN layer and then concatenates the outp
 the RNN to learn long range dependencies.</br>
 For LSTM feature extraction is done by text encoding and embedding. How it is done is explained
 in tool description.</br>
-#### Step 5: Train the model</br>
+### Step 5: Train the model</br>
 history = model.fit(train_dataset, epochs=10,
 validation_data=test_dataset,
 validation_steps=30)</br>
@@ -75,7 +75,7 @@ The model is trained with the input obtained from text encoding and embedding. O
 is trained, we can validate it by calculating its accuracy.</br>
 Once we get the model ready, we can use to develop the application.
 ### 2.Tool Description
-##### TENSORFLOW:-
+### TENSORFLOW:-
 The most famous deep learning library in the world is Google's TensorFlow. Google product uses
 machine learning in all of its products to improve the search engine, translation, image captioning or
 recommendations.
@@ -89,7 +89,7 @@ comes out the other end as output.</br>
 A tensor can be originated from the input data or the result of a computation. In TensorFlow, all
 the operations are conducted inside a graph. The graph is a set of computation that takes place
 successively. Each operation is called an op node and are connected to each other.</br>
-#### Feature Extraction - Word Embedding
+### Feature Extraction - Word Embedding
 We cannot use the Doc2Vec for preprocessing because it will transfer the entire document
 into one vector and lose the order information. To prevent that, we use the word embedding
 instead. We first clean the text data by removing all characters which are not letters nor numbers.
@@ -108,7 +108,7 @@ The word embedding will train each word vector based on word similarity. If two 
 frequently appear together in the text, they are thought to be more similar and the distance of their
 corresponding vectors is small. The pre-processing transfers each news in raw text into a fixed
 size matrix.
-#### Semantic Analysis
+### Semantic Analysis
 
 Text classification offers a good framework for getting familiar with textual data processing
 without lacking interest, either. In fact, there are many interesting applications for text classification
@@ -120,7 +120,7 @@ Sentiment analysis aims to estimate the sentiment polarity of a body of text bas
 on its content. The sentiment polarity of text can be defined as a value that says whether the
 expressed opinion is positive (polarity=1), negative (polarity=0), or neutral. In this tutorial, we
 will assume that texts are either positive or negative, but that they can’t be neutral.</br>
-#### Prediction Model - Neural Network Embeddings
+### Prediction Model - Neural Network Embeddings
 An embedding is a mapping of a discrete — categorical — variable to a vector of continuous
 numbers. In the context of neural networks, embedding’s are low-dimensional, learned continuous
 vector representations of discrete variables. Neural network embedding are useful because they
