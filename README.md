@@ -29,24 +29,24 @@ intend to use LSTM to classify the polarity of reviews into positive and negativ
 
 ### METHODOLOGY
 We have used a RNN using LSTM to classify the text and movie review articles to build a classifier that
-can make decisions about information based on the content from the corpus. </br>The model focus on
+can make decisions about information based on the content from the corpus.The model focus on
 classifying the text based on the semantic analysis. 
-Detailed process of how model is built is explained further in the report.</br>
-Basic Methodology can be described in following steps.</br>
-### Step 1 : Collecting Data</br>
+Detailed process of how model is built is explained further in the report.
+Basic Methodology can be described in following steps.
+### Step 1 : Collecting Data
 We are using tensorflow dataset of imdb reviews. The IMDB large movie review dataset is a
 binary classification dataset—all the reviews have either a positive or negative sentiment. The
 dataset will be imported from tensorflow-datasets library.</br>
-### Step 2: Data preprocessing</br>
+### Step 2: Data preprocessing
 A simple approach is to assume that the smallest unit of information in a text is the word (as
 opposed to the character). Therefore, we will be representing our texts as word sequences.</br>
-The sentence is “ This is a Cat.”</br>
+The sentence is “ This is a Cat.”
 In this example, we removed the punctuation and made each word lowercase because we assume
 that punctuation and letter case don’t influence the meaning of words. In fact, we want to avoid
 making distinctions between similar words such as This and this or cat. and cat.
 The sequence of words are converted and encoded into integers using tensorflow encoder. This
 encoded integer is dictionary of words with unique integer assigned to each word.</br>
-### Step 3: Prepare the data for training</br>
+### Step 3: Prepare the data for training
 Next create batches of these encoded strings. Use the padded_batch method to zero-pad the
 sequences to the length of the longest string in the batch:</br>
 BUFFER_SIZE = 10000</br>
@@ -131,7 +131,8 @@ Neural network embedding have 3 primary purposes:</br>
 recommendations based on user interests or cluster categories.
 2. As input to a machine learning model for a supervised task.</br>
 3. For visualization of concepts and relations between categories.</br>
-LSTM – Long short-term memoryLong short-term memory (LSTM) is an artificial recurrent neural network (RNN) architecture
+
+**LSTM – Long short-term memoryLong short-term memory (LSTM)** is an artificial recurrent neural network (RNN) architecture
 used in the field of deep learning. Unlike standard feedforward neural networks, LSTM has
 feedback connections. Sequence prediction problems have been around for a long time. They are
 considered as one of the hardest problems to solve in the data science industry. These include a
