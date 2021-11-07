@@ -23,7 +23,6 @@ prediction. Many previous studies focused on enriching text representation to ad
 classification task. However, the traditional classification methods with RNN only studied intensively
 on the words and their relationship in some specific corpus/dataset.
 ### OBJECTIVE
-
 Our focus is to develop an application to classify the review of movies dataset using RNN. We
 intend to use LSTM to classify the polarity of reviews into positive and negative.
 
@@ -36,7 +35,7 @@ Basic Methodology can be described in following steps.
 ### Step 1 : Collecting Data
 We are using tensorflow dataset of imdb reviews. The IMDB large movie review dataset is a
 binary classification dataset—all the reviews have either a positive or negative sentiment. The
-dataset will be imported from tensorflow-datasets library.</br>
+dataset will be imported from tensorflow-datasets library
 ### Step 2: Data preprocessing
 A simple approach is to assume that the smallest unit of information in a text is the word (as
 opposed to the character). Therefore, we will be representing our texts as word sequences.</br>
@@ -45,32 +44,37 @@ In this example, we removed the punctuation and made each word lowercase because
 that punctuation and letter case don’t influence the meaning of words. In fact, we want to avoid
 making distinctions between similar words such as This and this or cat. and cat.
 The sequence of words are converted and encoded into integers using tensorflow encoder. This
-encoded integer is dictionary of words with unique integer assigned to each word.</br>
+encoded integer is dictionary of words with unique integer assigned to each word
 ### Step 3: Prepare the data for training
 Next create batches of these encoded strings. Use the padded_batch method to zero-pad the
-sequences to the length of the longest string in the batch:</br>
-BUFFER_SIZE = 10000</br>
-BATCH_SIZE = 64</br>
-train_dataset = train_dataset.shuffle(BUFFER_SIZE)</br>
-train_dataset = train_dataset.padded_batch(BATCH_SIZE, train_dataset.output_shapes)</br>
-test_dataset = test_dataset.padded_batch(BATCH_SIZE, test_dataset.output_shapes)</br>
-### Step 4: Create the model</br>
-Build a tf.keras.Sequential model and start with an embedding layer. An embedding layer stores
+sequences to the length of the longest string in the batch:
+```
+BUFFER_SIZE = 10000
+BATCH_SIZE = 64
+train_dataset = train_dataset.shuffle(BUFFER_SIZE)
+train_dataset = train_dataset.padded_batch(BATCH_SIZE, train_dataset.output_shapes)
+test_dataset = test_dataset.padded_batch(BATCH_SIZE, test_dataset.output_shapes
+```
+### Step 4: Create the model
+Build a **tf.keras.Sequential** model and start with an embedding layer. An embedding layer stores
 one vector per word. When called, it converts the sequences of word indices to sequences of
 vectors. These vectors are trainable. After training (on enough data), words with similar meanings
-often have similar vectors.</br>
+often have similar vectors
 This index-lookup is much more efficient than the equivalent operation of passing a one-hot
-encoded vector through a tf.keras.layers.Dense layer.A recurrent neural network (RNN) processes sequence input by iterating through the elements.
-RNNs pass the outputs from one timestep to their input—and then to the next.</br>
-The tf.keras.layers.Bidirectional wrapper can also be used with an RNN layer. This propagates the
+encoded vector through a **tf.keras.layers.Dense** layer.
+A recurrent neural network (RNN) processes sequence input by iterating through the elements.
+RNNs pass the outputs from one timestep to their input—and then to the next.
+The **tf.keras.layers.Bidirectional** wrapper can also be used with an RNN layer. This propagates the
 input forward and backwards through the RNN layer and then concatenates the output. This helps
-the RNN to learn long range dependencies.</br>
+the RNN to learn long range dependencies.
 For LSTM feature extraction is done by text encoding and embedding. How it is done is explained
-in tool description.</br>
-### Step 5: Train the model</br>
+in tool description.
+### Step 5: Train the model
+```
 history = model.fit(train_dataset, epochs=10,
 validation_data=test_dataset,
-validation_steps=30)</br>
+validation_steps=30)
+```
 The model is trained with the input obtained from text encoding and embedding. Once the model
 is trained, we can validate it by calculating its accuracy.</br>
 Once we get the model ready, we can use to develop the application.
@@ -79,16 +83,16 @@ Once we get the model ready, we can use to develop the application.
 The most famous deep learning library in the world is Google's TensorFlow. Google product uses
 machine learning in all of its products to improve the search engine, translation, image captioning or
 recommendations.
-Tensorflow architecture works in three parts:</br>
-- Preprocessing the data</br>
-- Build the model</br>
-- Train and estimate the model</br>
+Tensorflow architecture works in three parts:
+- Preprocessing the data
+- Build the model
+- Train and estimate the model
 It is called Tensorflow because it takes input as a multi-dimensional array, also known as tensors.
 The input goes in at one end, and then it flows through this system of multiple operations and
-comes out the other end as output.</br>
+comes out the other end as output.
 A tensor can be originated from the input data or the result of a computation. In TensorFlow, all
 the operations are conducted inside a graph. The graph is a set of computation that takes place
-successively. Each operation is called an op node and are connected to each other.</br>
+successively. Each operation is called an op node and are connected to each other.
 ### Feature Extraction - Word Embedding
 We cannot use the Doc2Vec for preprocessing because it will transfer the entire document
 into one vector and lose the order information. To prevent that, we use the word embedding
@@ -103,7 +107,7 @@ we truncate the list longer than 500 numbers because more than half of the news 
 500 words. Then for those lists shorter than 500 words, we pad 0’s at the beginning of the list.We also delete the data with only a few words since they don’t carry enough information
 for training. By doing this, we transfer the original text string to a fixed length integer vector while
 preserving the words order information. Finally, we use word-embedding to transfer each word ID
-to a 32-dimension vector.</br>
+to a 32-dimension vector.
 The word embedding will train each word vector based on word similarity. If two words
 frequently appear together in the text, they are thought to be more similar and the distance of their
 corresponding vectors is small. The pre-processing transfers each news in raw text into a fixed
@@ -115,22 +119,22 @@ without lacking interest, either. In fact, there are many interesting applicatio
 such as spam detection and sentiment analysis. In this post, we will tackle the latter and show in
 detail how to build a strong baseline for sentiment analysis classification. This will allow us to get
 our hands dirty and learn about basic feature extraction methods which are yet very efficient in
-practice.</br>
+practice.
 Sentiment analysis aims to estimate the sentiment polarity of a body of text based solely
 on its content. The sentiment polarity of text can be defined as a value that says whether the
 expressed opinion is positive (polarity=1), negative (polarity=0), or neutral. In this tutorial, we
-will assume that texts are either positive or negative, but that they can’t be neutral.</br>
+will assume that texts are either positive or negative, but that they can’t be neutral.
 ### Prediction Model - Neural Network Embeddings
 An embedding is a mapping of a discrete — categorical — variable to a vector of continuous
 numbers. In the context of neural networks, embedding’s are low-dimensional, learned continuous
 vector representations of discrete variables. Neural network embedding are useful because they
 can reduce the dimensionality of categorical variables and meaningfully represent categories in
-the transformed space.</br>
-Neural network embedding have 3 primary purposes:</br>
+the transformed space.
+Neural network embedding have 3 primary purposes:
 1. Finding nearest neighbors in the embedding space. These can be used to make
 recommendations based on user interests or cluster categories.
-2. As input to a machine learning model for a supervised task.</br>
-3. For visualization of concepts and relations between categories.</br>
+2. As input to a machine learning model for a supervised task.
+3. For visualization of concepts and relations between categories.
 
 **LSTM – Long short-term memoryLong short-term memory (LSTM)** is an artificial recurrent neural network (RNN) architecture
 used in the field of deep learning. Unlike standard feedforward neural networks, LSTM has
@@ -138,7 +142,7 @@ feedback connections. Sequence prediction problems have been around for a long t
 considered as one of the hardest problems to solve in the data science industry. These include a
 wide range of problems; from predicting sales to finding patterns in stock markets’ data, from
 understanding movie plots to recognizing your way of speech, from language translations to
-predicting your next word on your iPhone’s keyboard.</br>
+predicting your next word on your iPhone’s keyboard.
 LSTMs have an edge over conventional feed-forward neural networks and RNN in many ways.
 This is because of their property of selectively remembering patterns for long durations of time.
 The purpose of this article is to explain LSTM and enable you to use it in real life problems.
